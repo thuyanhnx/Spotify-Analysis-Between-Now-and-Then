@@ -3,21 +3,15 @@
 
 # # Spotify API
 # 
-# In order to read Spotify API, I need to apply for permissions & credentials through their Developer site. I then used Python to scrape the Spotify API web (that I learned from multiple articles in "Towards Data Science" to extract all songs from our "On Repeat" playlist).
+# In order to read Spotify API, I need to apply for permissions & credentials through their Developer site. 
+# I then used Python to scrape the Spotify API web (that I learned from multiple articles in "Towards Data Science" to extract all songs from our "On Repeat" playlist).
 # 
 
 # In[1]:
 
 
 import json
-import seaborn as sns
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib import style
-from sklearn.model_selection import cross_val_predict
-from sklearn import metrics
-from sklearn import svm
-get_ipython().run_line_magic('matplotlib', 'inline')
 import pandas as pd
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -37,7 +31,7 @@ results = sp.playlist(playlist_id)
 # In[2]:
 
 
-##### create a list of song ids
+# create a list of song ids
 ids=[]
 
 for item in results['tracks']['items']:
@@ -77,29 +71,30 @@ for song_id in ids:
 
 song_meta_df=pd.DataFrame.from_dict(song_meta)
 
-##### check the song feature
+# check the song feature
 features = sp.audio_features(song_meta['id'])
 
-##### change dictionary to dataframe
+# change dictionary to dataframe
 features_df=pd.DataFrame.from_dict(features)
 
-##### convert milliseconds to mins
-##### duration_ms: The duration of the track in milliseconds.
-##### 1 minute = 60 seconds = 60 × 1000 milliseconds = 60,000 ms
+# convert milliseconds to mins
+# duration_ms: The duration of the track in milliseconds.
+# 1 minute = 60 seconds = 60 × 1000 milliseconds = 60,000 ms
 features_df['duration_ms']=features_df['duration_ms']/60000
 
-##### combine two dataframe
+# combine two dataframe
 final_df=song_meta_df.merge(features_df)
 
-##### delete unnecessary columns
+# delete unnecessary columns
 columns = ['uri','track_href','analysis_url']
 final_df.drop(columns, inplace=True, axis=1)
 
-##### print final dataframe
+# print final dataframe
 print(final_df.head())
 
 
-# We can conduct our analysis right after this step to get our data updated everytime we run this code again. However, as I don't want to publish my account client id information, I will save the dataframe as .csv and then I will read them later in the analysis.
+# We can conduct our analysis right after this step to get our data updated everytime we run this code again. 
+# However, as I don't want to publish my account client id information, I will save the dataframe as .csv and then I will read them later in the analysis.
 
 # In[3]:
 
@@ -108,7 +103,6 @@ print(final_df.head())
 final_df.to_csv('') 
 
 
-# In[ ]:
 
 
 
