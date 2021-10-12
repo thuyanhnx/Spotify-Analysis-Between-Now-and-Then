@@ -4,7 +4,7 @@
 # Spotify API
 
 # In order to read Spotify API, I need to apply for permissions & credentials through their Developer site. 
-# I then used Python to scrape the Spotify API web (that I learned from multiple articles in "Towards Data Science" to extract all songs from our "On Repeat" playlist).
+# Then I used Python to scrape the Spotify API web to extract all songs from our "On Repeat" playlist.
 
 import json
 import numpy as np
@@ -23,7 +23,6 @@ results = sp.playlist(playlist_id)
 
 
 # Convert JSON to DataFrame
-
 # create a list of song ids
 ids=[]
 
@@ -85,8 +84,8 @@ final_df.drop(columns, inplace=True, axis=1)
 # print final dataframe
 print(final_df.head())
 
-# We can conduct our analysis right after this step to get our data updated everytime we run this code again. 
-# However, as I don't want to publish my account client id information, I will save the dataframe as .csv and then I will read them later in the analysis.
+# We can conduct our analysis right after this step to get our data updated everytime we run the code again. 
+# However, as I don't want to publish my account's client id information, I will save the dataframe as .csv and then I will read them later in the analysis.
 
 # Save as csv
 final_df.to_csv('') 
